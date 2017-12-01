@@ -24,3 +24,12 @@ query <- dbGetQuery(conn = con,
                              FROM table')
 # Disconnect database ----------------------------------------------------------
 dbDisconnect(con)
+
+## Create table from CSV file --------------------------------------------------
+dbWriteTable(con,
+             name = "TABLE_NAME",
+             value = "FILE.CSV",
+             row.names = F,
+             header = T,
+             sep = c("|"),
+             overwrite = T)

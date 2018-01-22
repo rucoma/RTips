@@ -46,3 +46,7 @@ lapply(objects, load, .GlobalEnv)
 colSum <- c("col1", "col2", "col3")
 df$varSum <- rowSums(df[, colSum, with = F], na.rm = T)
 
+## Modify multiple columns at once elegantly using data.table ---
+colFecha <- colnames(TP)[grep(pattern = 'fecha', x = colnames(TP))]
+TP <- 
+  TP[, (colFecha) := lapply(.SD, as.Date, format = '%Y-%m-%d'), .SDcols = colFecha]

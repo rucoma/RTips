@@ -5,6 +5,9 @@
 
 library(ggplot2)
 library(plotly)
+library(rbokeh)
+library(igraph)
+library(dygraphs)
 
 ## Using data frame variables as arguments in custom function
 testplot <- function(meansdf, xvar, yvar, fillvar) {
@@ -43,3 +46,18 @@ tema <- theme(
   strip.background = element_rect(fill = 'orange'),
   strip.text = element_text(family = 'Arial', face = 'bold', colour = 'red')
 )
+
+## Charting with bokeh
+p <- figure() %>%
+  ly_points(Sepal.Length, Sepal.Width, data = iris,
+            color = Species, glyph = Species,
+            hover = list(Sepal.Length, Sepal.Width))
+p
+
+# Charting with igraph
+demo(package="igraph")
+demo(package="igraph", topic = 'cohesive')
+
+# Charting with dygraphs
+lungDeaths <- cbind(mdeaths, fdeaths)
+dygraph(lungDeaths) %>% dyRangeSelector()

@@ -5,6 +5,9 @@
 
 library(tidyverse)
 library(data.table)
+# Always run this before library(xlsx)
+options( java.parameters = "-Xmx4g" ) #4g indicates amount of RAM dedicated
+library(xlsx)
 
 ## Get the last/first row from a grouped data frame / data.table -
 

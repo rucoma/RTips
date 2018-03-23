@@ -61,3 +61,12 @@ demo(package="igraph", topic = 'cohesive')
 # Charting with dygraphs
 lungDeaths <- cbind(mdeaths, fdeaths)
 dygraph(lungDeaths) %>% dyRangeSelector()
+
+# Palettes per factor
+paletaInd <- 
+  scale_color_manual(
+    values = c('FACTORX' = '#ff702f',
+               'FACTORY' = 'navy',
+               'FACTORZ' = 'yellow',
+               'FACTORA' = 'maroon')
+    )

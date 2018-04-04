@@ -53,3 +53,6 @@ df$varSum <- rowSums(df[, colSum, with = F], na.rm = T)
 colFecha <- colnames(TP)[grep(pattern = 'fecha', x = colnames(TP))]
 TP <- 
   TP[, (colFecha) := lapply(.SD, as.Date, format = '%Y-%m-%d'), .SDcols = colFecha]
+
+## Join tables with dplyr using multiple columns ----------------
+z <- left_join(a, b, by = c('col1x' = 'col1y', 'col2x' = 'col2y'))

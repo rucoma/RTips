@@ -56,3 +56,7 @@ TP <-
 
 ## Join tables with dplyr using multiple columns ----------------
 z <- left_join(a, b, by = c('col1x' = 'col1y', 'col2x' = 'col2y'))
+
+## Compute the mode ---------------------------------------------
+library(modeest)
+mlv(df, method = "mfv")

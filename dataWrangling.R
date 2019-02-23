@@ -28,7 +28,7 @@ lastRowGroup <- function(df, fieldId, fieldDate) {
 }
 
 ## Substitute to ifelse() -> dplyr::case_when() -----------------
-case_when((str_sub(string = Telefono, start = 1, end = 2) != '34') | (nchar(Telefono) < 9) ~ paste0('34', Telefono), 
+case_when((str_sub(string = Telefono, start = 1, end = 2) != '34') | (nchar(Telefono) < 9) ~ paste0('34', Telefono),
           TRUE ~Telefono)
 
 ## Creating labelled intervals ----------------------------------
@@ -51,7 +51,7 @@ df$varSum <- rowSums(df[, colSum, with = F], na.rm = T)
 
 ## Modify multiple columns at once elegantly using data.table ---
 colFecha <- colnames(TP)[grep(pattern = 'fecha', x = colnames(TP))]
-TP <- 
+TP <-
   TP[, (colFecha) := lapply(.SD, as.Date, format = '%Y-%m-%d'), .SDcols = colFecha]
 
 ## Join tables with dplyr using multiple columns ----------------
@@ -60,3 +60,19 @@ z <- left_join(a, b, by = c('col1x' = 'col1y', 'col2x' = 'col2y'))
 ## Compute the mode ---------------------------------------------
 library(modeest)
 mlv(df, method = "mfv")
+
+## Use a column as a function argument --------------------------
+# https://stackoverflow.com/questions/47494975/passing-column-name-as-parameter-to-a-function-using-dplyr
+
+testFun <- function(df, var){
+  require(tidyverse)
+  require(data.table)
+  
+  var <- enquo(var)
+  
+  result <- df %>%
+    group_by(some_variable) %>%
+    summarise(!!var := sum(!!var))
+}
+
+xxx <- testFun(df = dfTest, var = varTest)

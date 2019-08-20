@@ -76,3 +76,9 @@ testFun <- function(df, var){
 }
 
 xxx <- testFun(df = dfTest, var = varTest)
+
+## Compute roll means --------------------------------------------
+library(zoo)
+iris %>%
+  group_by(Species) %>%
+  mutate(roll3 = rollapplyr(Sepal.length, width = 3, FUN = sum, align = 'right', fill = NA))

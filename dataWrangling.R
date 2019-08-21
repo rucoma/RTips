@@ -77,7 +77,7 @@ testFun <- function(df, var){
 
 xxx <- testFun(df = dfTest, var = varTest)
 
-## Compute roll means --------------------------------------------
+## Compute roll sums --------------------------------------------
 library(zoo)
 iris %>%
   group_by(Species) %>%
